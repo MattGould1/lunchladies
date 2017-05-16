@@ -1,15 +1,17 @@
-'use strict';
+'use strict'
 
-const express = require('express');
+/*
+|--------------------------------------------------------------------------
+| Http Server
+|--------------------------------------------------------------------------
+|
+| Here we boot the HTTP Server by calling the exported method. A callback
+| function is optionally passed which is executed, once the HTTP server
+| is running.
+|
+*/
 
-// Constants
-const PORT = 8080;
-
-// App
-const app = express();
-app.get('/', function (req, res) {
-  res.send('Hello world\n');
-});
-
-app.listen(PORT);
-console.log('Running on http://localhost:' + PORT);
+const http = require('./bootstrap/http')
+http(function () {
+  use('Event').fire('Http.start')
+})
