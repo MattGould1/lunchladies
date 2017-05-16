@@ -12,12 +12,69 @@
 |
 */
 
-// const Factory = use('Factory')
+const User = use('App/Model/User')
+const Product = use('App/Model/Product')
+const ProductDetail = use('App/Model/ProductDetail')
+const ProductCategory = use('App/Model/ProductCategory')
+const Transaction = use('App/Model/Transaction')
+const TransactionDetail = use('App/Model/TransactionDetail')
 
 class DatabaseSeeder {
 
   * run () {
-    // yield Factory.model('App/Model/User').create(5)
+    
+    var user_ids = [],
+        count = 0;
+
+    var fake = new Fake()
+    var session_count = 10
+    var user_count = 5
+
+    const sessions = yield Factory.model('App/Model/Session').create(session_count)
+
+    const users = yield Factory.model('App/Model/User').create(user_count)
+
+    users.each(function * (user) {
+      user_ids.push(user.id)
+      yield user.save()
+    })
+
+    sessions.each(function * (session) {
+        session.user_id = user_ids[count]
+
+        if (count + 1 == user_count)
+          count = 0;
+
+        count++
+        var bool = fake.bool()
+
+        if (false) { // just save the session
+          yield session.save()
+        } else { // save the session with the activity yay!
+
+          var activity_id = [
+            'website',
+            'mobile'
+          ];
+
+          var opportunity_type = [
+            1,
+            2,
+            3,
+          ];
+
+          const activity = new Activity()
+
+          activity.activity_type = fake.pickone(opportunity_type)
+          activity.opportunity_type = fake.pickone(opportunity_type)
+          activity.activity_id = fake.pickone(activity_id)
+          activity.call_id = fake.fbid()
+          
+          yield session.activity().save(activity)
+        }
+
+    })
+
   }
 
 }
