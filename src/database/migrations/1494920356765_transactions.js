@@ -8,8 +8,8 @@ class TransactionsTableSchema extends Schema {
     this.create('transactions', (table) => {
       table.increments()
       table.timestamps()
-      table.int('user_id')
-      table.int('transaction_detail_id')
+      table.integer('user_id')
+      table.integer('transaction_detail_id')
       table.decimal('price')
     })
   }

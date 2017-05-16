@@ -8,11 +8,11 @@ class TransactionDetailsTableSchema extends Schema {
     this.create('transaction_details', (table) => {
       table.increments()
       table.timestamps()
-      table.int('transaction_id')
-      table.int('product_id')
-      table.int('delivery_time')
-      table.int('location')
-      table.int('payment')
+      table.integer('transaction_id')
+      table.integer('product_id')
+      table.integer('delivery_time')
+      table.integer('location')
+      table.integer('payment')
       table.string('special_request')
     })
   }

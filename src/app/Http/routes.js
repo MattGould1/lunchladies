@@ -18,3 +18,6 @@
 const Route = use('Route')
 
 Route.get('*', 'TransactionsController.index')
+
+Route.post('/productcategory', 'ProductsCategoryController.store')
+Route.post('/productcategory/:id', 'ProductsCategoryController.update')
