@@ -10,7 +10,10 @@ class TransactionsTableSchema extends Schema {
       table.timestamps()
       table.integer('user_id')
       table.integer('transaction_detail_id')
-      table.decimal('price')
+      table.string('delivery_time')
+      table.string('location')
+      table.integer('payment_status')
+      table.integer('total_price')
     })
   }
 

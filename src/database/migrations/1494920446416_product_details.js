@@ -9,8 +9,9 @@ class ProductDetailsTableSchema extends Schema {
       table.increments()
       table.timestamps()
       table.integer('product_id')
-      table.string('price')
-      table.string('size')
+      table.integer('product_category_id')
+      table.integer('price')
+      table.integer('stock')
     })
   }
 
